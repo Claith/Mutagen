@@ -1,0 +1,11 @@
+{
+  "name" : "mutagenLightWalkerEffect",
+  "effectConfig" : {},
+  "defaultDuration" : 5,
+
+  "scripts" : [
+    "mutagenLightWalkerEffect.lua"
+  ],
+
+  "animationConfig" : "mutagenLightWalkerEffect.animation"
+}

@@ -1,0 +1,9 @@
+{
+  "name" : "Mutagen",
+  "version" : "Beta v. Enraged Koala",
+  "path" : ".",
+  "dependencies" : [],
+  "metadata" : {
+	"author" : "Claith"
+  }
+}
