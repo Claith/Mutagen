@@ -1,0 +1,142 @@
+[
+	// Required for Mod Setup -- Allows for multiple status effects as an option. Look into, might cause mem issues
+	//{ "op" : "add", "path" : "/statusControllerSettings/persistentEffectCategories/-", "value" : "mutagen" },
+	{ "op" : "add", "path" : "/statusControllerSettings/primaryScriptSources/-", "value" : "/scripts/mutagen.lua" },
+
+	//// Constants
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSkillLevelUpThreshold", "value" : 100.0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSkillLevelCap", "value" : 1000 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSkillLevelUpDelta", "value" : 1.0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenMinSkill", "value" : 0.0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenMinSkillDelta", "value" : 0.5 },
+
+	// Version and Setup Control -- Resources seem to default to 100 instead of "default Percentage" on first run
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenVersion", "value" : 0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSetup", "value" : 0 },
+
+	//// Skills
+	
+	// Skill notes: The Jumping and Running Skills, when they get too high, it makes movement harder instead of easier. I might want to cap those skills to maybe 2 to 3 times normal movement speed. Since this isn't that great of an effect, I'm thinking that I should instead set up an indirect skill that levels with both of them. The first thought is to make a skill, so that when the player takes damage, do a random short range teleport, cloning the character as an entity that takes the damage in place of the player. That skill can cap out at 50% chance of happening. I may also want to lower the max level, or rather allow the level to go to 1000, but set the skills to be considered "max" at level 100 instead, and make them just a bit harder to reach that level. The effects of the skill can still go beyond that "max", but those will not be a focus on balancing.
+
+	// I will need to add another value that will work with the interface and allow players to toggle on and off skills or maybe adjust the strength of the skill up to their maximum. Have a bar that has a selectable range from 0.0 - 100.0, which is the skill level divided by 10, obviously.
+	
+	// Need to go back through these before release to check if they all work well. Currently just adding and seeing if it doesn't crash and xp is gained.
+	
+	// Run Skill -- Increased Running Speed -- uses math.log -- works / needs adjustment --  Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenRunSkillLevel", "value" : 1 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenRunSkill", "value" : 0.0 },
+
+	// Walk Skill -- Increased Backwards Running Speed -- uses math.log -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenWalkSkillLevel", "value" : 1 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenWalkSkill", "value" : 0.0 },
+	
+	// Jumping Skill -- Increased Jump Height and Reduced Fall Damage -- uses math.log -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenJumpSkillLevel", "value" : 1 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenJumpSkill", "value" : 0.0 },
+	
+	// Swim Skill -- Increased Swim Speed -- uses math.log -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSwimSkillLevel", "value" : 1 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSwimSkill", "value" : 0.0 },
+	
+	// Endurance Skill -- Regenerations a portion of lost health; starts at level 1, because log(1) == 0 -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnduranceSkillLevel", "value" : 1 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnduranceSkill", "value" : 0.0 },
+	
+	// Energy Regeneration Skill -- Increased Energy Regeneration Rate / Increased Energy Cap -- Works, don't know which value to aim for in late game
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnergySkillLevel", "value" : 0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnergySkill", "value" : 0.0 },
+	
+	// Dark Walker Skill -- Health regeneration while in low light -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenDarkWalkerSkillLevel", "value" : 0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenDarkWalkerSkill", "value" : 0.0 },
+	
+	// Light Walker Skill -- Applies a Glow Effect to nearby entities -- Works
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenLightWalkerSkillLevel", "value" : 0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenLightWalkerSkill", "value" : 0.0 },
+	
+	// Tempurature Skill -- No current Effect
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenTempuratureSkillLevel", "value" : 0 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenTempuratureSkill", "value" : 0.0 },
+	
+	// Breath Holding Skill -- Holds Breath for a duration based on skill level -- Needs work, slows breath loss, doesn't stop it
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenBreathSkillLevel", "value" : 500 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenBreathSkill", "value" : 0.0 },
+	
+	/// Derivative Skills
+	
+	// Evasion -- Random direction teleport, leaving behind a short duration image / clone -- haven't tested
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEvasionSkillLevel", "value" : 901 },
+	{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEvasionSkill", "value" : 0.0 }
+	
+	// Energy Transformation -- Absorbs Energy from High Tempurature Environments or Heals slowly in Low Tempurature Environments
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnergyTransformSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenEnergyTransformSkill", "value" : 0.0 },
+	
+	/// Not Implemented Skill
+	
+	// Mining Skill -- Increasing Chance for Bonus Ore Drop
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenMiningSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenMiningSkill", "value" : 0.0 },
+	
+	// Crafting Skill -- Increasing Chance for Bonus of Crafted / Smelted Item
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenCraftingSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenCraftingSkill", "value" : 0.0 },
+	
+	// Exploration Skill -- Increased Money Drop / Item Drop Chance
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenExplorationSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenExplorationSkill", "value" : 0.0 },
+	
+	// Piloting Skill -- Reduced Fuel Cost
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenPilotSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenPilotSkill", "value" : 0.0 },
+	
+	// Cooling Skill -- Increased Protection from Cold
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenColdSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenColdSkill", "value" : 0.0 },
+	
+	// Radiation Resistance Skill -- Increased Radiation Resistance
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenRadiationSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenRadiationSkill", "value" : 0.0 },
+	
+	// Hunger Skill -- Slows Hunger Loss
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenHungerSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenHungerSkill", "value" : 0.0 },
+	
+	/// Weapon Skills
+	
+	// 1h Sword -- Extra Bleed Damage
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSwordSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSwordSkill", "value" : 0.0 },
+	
+	// 2h Sword -- Reduces Enemy's Movement Speed
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenBSwordSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenBSwordSkill", "value" : 0.0 },
+	
+	// Dagger - Damages Enemy's Energy (saps?)
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenDaggerSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenDaggerSkill", "value" : 0.0 },
+	
+	// Hammer -- Increased Knockback
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenHammerSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenHammerSkill", "value" : 0.0 },
+	
+	// Axe -- Increased Attack Damage
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenAxeSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenAxeSkill", "value" : 0.0 },
+	
+	// Spear -- Short Duration Paralyze / Stun
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSpearSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenSpearSkill", "value" : 0.0 },
+	
+	// Gun -- Chance for Double Attack
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenGunSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenGunSkill", "value" : 0.0 },
+	
+	// Stave --
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenStaveSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenStaveSkill", "value" : 0.0 },
+	
+	// Shield -- Increased Block Ammount
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenShieldSkillLevel", "value" : 0 },
+	//{ "op" : "add", "path" : "/statusControllerSettings/statusProperties/mutagenShielfSkill", "value" : 0.0 }
+]

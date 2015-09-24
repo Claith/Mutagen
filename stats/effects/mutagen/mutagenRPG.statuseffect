@@ -1,0 +1,50 @@
+{
+  "name" : "mutagenRPG",
+  "effectConfig" : {
+		"runSkillModifier" 						: 0.25,
+		"runSpeed"										:	14.0,
+		"walkSkillModifier"						: 0.55,
+		"walkSpeed"										: 8.0,
+		"jumpSkillModifier"						: 0.25,
+		"fallDamageModifier"					: -0.001,
+		"swimSkillModifier"						: 0.5,
+		"liquidFriction"							: 5.0,
+		"enduranceSkillModifier"			: 0.25,
+		"energySkillModifier"					: 0.2,
+		"breathSkillModifier"					: 0.6,
+		//"breathSkillCooldownBase"			: 0.0,
+		"darkWalkerSkillModifier"			: 0.0001,
+		"darkWalkerSkillCooldown"			: 10.0,
+		"darkWalkerSkillCooldownMod"	: -0.01,
+		"darkWalkerSkillThreshold"		: 0.2,
+		"lightWalkerSkillModifier"		: 0.4,
+		"lightWalkerSkillRange"				: 100,
+		"lightWalkerSkillCooldown"		: 10.0,
+		"lightWalkerSkillCooldownMod"	: -0.005,
+		"lightWalkerSkillThreshold" 	: 0.6,
+		// Tempurature Holder
+		"evasionSkillModifier"				: 0.25,
+		"evasionCooldown"							:	10.0,
+		"evasionCooldownModifier"			: -0.01,
+		"blinkCollisionCheckDiameter" : 4,
+		"blinkVerticalGroundCheck"		: 10,
+		"blinkFootOffset"							: -2.5,
+		"blinkOutTime"								: 0.15,
+		"blinkInTime"									: 0.15,
+		"blinkMode"										: "random",
+		"randomBlinkTries"						: 60,
+		"randomBlinkDiameter"					: 40,
+		"randomBlinkAvoidCollision"		: true,
+		"randomBlinkAvoidMidair"			: true,
+		"randomBlinkAvoidLiquid"			: true
+	},
+	
+	// 0.10 base e ~ 0.25 base 10
+	// 0.25 base e ~ 0.55 base 10
+	
+	//"animationConfig" : "mutagenRPG.animation",
+
+  "scripts" : [
+    "mutagenRPG.lua"
+  ]
+}

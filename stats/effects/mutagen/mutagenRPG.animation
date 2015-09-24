@@ -1,0 +1,77 @@
+{
+  "animatedParts" : {
+    "stateTypes" : {
+      "blinking" : {
+        "default" : "off",
+        "states" : {
+          "off" : { },
+          "in" : {
+            "frames" : 5,
+            "cycle" : 0.15,
+            "mode" : "transition",
+            "transition" : "off"
+          },
+          "out" : {
+            "frames" : 5,
+            "cycle" : 0.15,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      }
+    },
+
+    "parts" : {
+      "blinkeffect" : {
+        "properties" : {
+          "centered" : true
+        },
+
+        "partStates" : {
+          "blinking" : {
+            "in" : {
+              "properties" : {
+                "image" : "mutagenEvasionBlinkIn.png:<frameIndex>"
+              }
+            },
+
+            "out" : {
+              "properties" : {
+                "image" : "mutagenEvasionBlinkOut.png:<frameIndex>"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+	
+	"particleEmitters" : {
+    "mutagenLevelUpParticles" : {
+      "enabled" : true,
+      "emissionRate" : 1000.0,
+      "particles" : [
+        {
+          "particle" : {
+            "type" : "ember",
+            "size" : 2.0,
+            "color" : [60, 60, 60, 250],
+            "fade" : 0.9,
+            "destructionAction" : "shrink",
+            "destructionTime" : 3.0,
+            "position" : [0.0, 0.0],
+            "offsetRegion" : [0, 0, 0, 0],
+            "initialVelocity" : [0.0, 2.0],
+            "finalVelocity" : [0, 10.0],
+            "approach" : [0, 1.0],
+            "timeToLive" : 2.1,
+            "variance" : {
+              "timeToLive" : 0.7,
+              "finalVelocity" : [1.2, 0.7]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
